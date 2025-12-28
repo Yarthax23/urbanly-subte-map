@@ -1,0 +1,47 @@
+# Urbanly - Subte Map
+
+Technical exercise for Urbanly.
+
+## Description
+
+This project is a simple web application that displays a map of the City of Buenos Aires
+and visualizes subway lines and stations using public datasets.
+
+The application uses MapLibre for map rendering and OpenStreetMap raster tiles as the base map.
+
+## Tech Stack
+
+* TypeScript
+* MapLibre GL JS
+* OpenStreetMap raster tiles
+
+## Data Sources & Flow
+
+Subway stations and lines data are obtained from the Buenos Aires City Open Data Portal.
+
+Raw datasets (CSV / GeoJSON) are stored under `data/raw/`, normalized, and transformed into GeoJSON.
+The resulting GeoJSON files are then rendered on the map using MapLibre.
+
+## Project Structure
+
+```text
+├── data/
+│   ├── processed/          # Normalized GeoJSON files
+│   └── raw/                # Original datasets (CSV / GeoJSON)
+├── docs/
+│   └── project_log.md      
+├── public/
+│   └── index.html          
+├── src/
+│   └── main.ts
+├── README.md               # Project overview (this file)
+└── .gitignore
+```
+
+## Setup & Run
+
+Instructions will be added once the initial implementation is ready.
+
+## Notes
+
+This project prioritizes clarity, code organization, and maintainability.
