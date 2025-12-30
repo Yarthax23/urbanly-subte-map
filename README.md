@@ -19,8 +19,9 @@ The application uses MapLibre for map rendering and OpenStreetMap raster tiles a
 
 Subway stations and lines data are obtained from the Buenos Aires City Open Data Portal.
 
-Raw datasets (CSV / GeoJSON) are stored under `data/raw/`, normalized, and transformed into GeoJSON.
-The resulting GeoJSON files are then rendered on the map using MapLibre.
+Raw datasets (CSV / GeoJSON) are stored under `data/raw/`, normalized, and transformed into GeoJSON via a separated script.
+
+The resulting GeoJSON files, stored under `data/processed`, are then rendered on the map using MapLibre.
 
 ## Project Structure
 
