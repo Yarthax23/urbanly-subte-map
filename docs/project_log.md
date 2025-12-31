@@ -1,3 +1,35 @@
+## Day 2 – Drawing one subway line
+
+Initially attempted to load main.ts directly from HTML.
+Learned that browsers do not execute TypeScript directly and that
+a build/dev step is required when using npm-based MapLibre integration.
+
+* MapLibre + GeoJSON + render
+* Build with Vite (dev server) is deferred
+* Dataset transformation is deferred (for simplicity)
+* Reviewed https://maplibre.org/maplibre-gl-js/docs/
+* Reviewed https://maplibre.org/maplibre-gl-js/docs/examples/add-a-geojson-line/
+
+### Data relationships
+
+Line endpoints correspond to subway stations by coordinate equality, not by shared IDs.
+```ts
+64,Jose Hernandez,D,POINT 
+                 (`-58.45212`6677649765 `-34.566215`59971072)
+                        v
+MULTILINESTRING ((`-58.45212`56031295   `-34.566215`242404,
+                   -58.4516295768312     -34.5664769668698,
+                   -58.4490265638751     -34.5678793135606,
+                  `-58.44466`81474258   `-34.570012`3091016));1;D
+                        v
+63,Olleros,D,POINT      v
+                 (`-58.44466`9509559354 `-34.570012`54234762)
+```
+
+---
+
+Outcome: line rendering deferred until build system is introduced.
+
 ## Day 1 – Understanding data and setting the model
 
 ### Dataset exploration:
