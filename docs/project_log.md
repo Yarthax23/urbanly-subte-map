@@ -1,3 +1,36 @@
+## Day 4: Rendering a real subway line from data
+
+From CSV to GeoJSON (real data)
+
+**Objective Pipeline**
+>CSV → transformation → GeoJSON → MapLibre
+
+### Naive geometry rendering (expected incorrect output)
+
+Rendered a first-pass LineString generated from raw endpoint-only CSV data
+(`lineas-de-subte-extract.csv`).
+
+The resulting visualization shows erratic connections between stations
+across different subway lines. This behavior is expected and confirms that:
+
+- The CSV contains only endpoints, not full line geometries
+- Segments are unordered and mixed across lines
+- Naively flattening segments into a single LineString produces invalid topology
+
+This step validates the full data → GeoJSON → MapLibre rendering pipeline
+before introducing proper line filtering and geometry reconstruction.
+
+![Initial geometry pass](./images/day4-naive-rendering.png)
+
+This confirms that correct line rendering requires:
+- Per-line filtering
+- Ordered segment reconstruction
+- Proper handling of MultiLineString geometries
+
+Day 4 is considered complete.
+The system now supports data-driven rendering from CSV-derived GeoJSON,
+with known geometric inaccuracies that will be addressed in Day 5.
+
 ## Day 3 – Rendering the base map
 
 Implemented a minimal MapLibre setup using Vite + TypeScript and validated the full browser rendering pipeline.
