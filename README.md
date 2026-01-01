@@ -30,11 +30,13 @@ The resulting GeoJSON files, stored under `data/processed`, are then rendered on
 │   ├── processed/          # Normalized GeoJSON files
 │   └── raw/                # Original datasets (CSV / GeoJSON)
 ├── docs/
-│   └── project_log.md      
-├── public/
-│   └── index.html          
+│   ├── images/             # Screenshots and exploratory visuals
+│   └── project_log.md      # Daily research and decisions log    
 ├── src/
-│   └── main.ts
+│   └── main.ts             # Application entry point
+├── index.html              # HTML entry point (Vite)
+├── package-lock.json
+├── package.json
 ├── README.md               # Project overview (this file)
 └── .gitignore
 ```
