@@ -3,6 +3,10 @@
     "maplibre-gl": "^5.15.0"
   },
   "devDependencies": {
-    "@types/maplibre-gl": "^1.13.2"
+    "@types/maplibre-gl": "^1.13.2",
+    "vite": "^7.3.0"
+  },
+  "scripts": {
+    "dev": "vite"
   }
 }
