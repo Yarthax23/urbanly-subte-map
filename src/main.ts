@@ -2,6 +2,22 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { StyleSpecification } from 'maplibre-gl';
 
+const demoLine: GeoJSON.Feature<GeoJSON.LineString> = {
+  type: 'Feature',
+  properties: {
+    line: 'D',
+    demo: true,
+  },
+  geometry: {
+    type: 'LineString',
+    coordinates: [
+      [-58.4521256031295, -34.566215242404],
+      [-58.4516295768312, -34.5664769668698],
+      [-58.4490265638751, -34.5678793135606],
+      [-58.4446681474258, -34.5700123091016],
+    ],
+  },
+};
 
 const osmStyle: StyleSpecification = {
   version: 8,
@@ -33,24 +49,7 @@ const map = new maplibregl.Map({
 map.on('load', () => {
     map.addSource('subway-line-preview', {
     type: 'geojson',
-    data: {
-      type: 'FeatureCollection',
-      features: [
-        {
-          type: 'Feature',
-          properties: { line: 'D' },
-          geometry: {
-            type: 'LineString',
-            coordinates: [
-              [-58.4521256031295, -34.566215242404],
-              [-58.4516295768312, -34.5664769668698],
-              [-58.4490265638751, -34.5678793135606],
-              [-58.4446681474258, -34.5700123091016],
-            ],
-          },
-        },
-      ],
-    },
+    data: demoLine,
   });
 
   map.addLayer({
