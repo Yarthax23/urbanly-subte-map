@@ -49,7 +49,7 @@ const map = new maplibregl.Map({
 map.on('load', () => {
     map.addSource('subway-line-preview', {
     type: 'geojson',
-    data: demoLine,
+    data: '/data/processed/linea-d.geojson',
   });
 
   map.addLayer({
