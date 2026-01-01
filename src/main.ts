@@ -1,8 +1,6 @@
 // Entry point for the application
 import maplibregl from 'maplibre-gl';
-
-// Will be enabled once a bundler (Vite) is introduced
-// import 'maplibre-gl/dist/maplibre-gl.css';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 const map = new maplibregl.Map({
     container: 'map',
