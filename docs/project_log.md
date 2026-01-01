@@ -1,3 +1,33 @@
+## Day 3 – Rendering the base map
+
+Implemented a minimal MapLibre setup using Vite + TypeScript and validated the full browser rendering pipeline.
+
+Successfully rendered a base map and a hardcoded GeoJSON representation of
+Subway Line D, confirming correct map initialization, styling, and layer
+configuration prior to real data integration.
+
+**Pipeline validated**
+>HTML → TS → MapLibre → GeoJSON → visual output
+
+
+Key outcomes:
+* MapLibre initialized via npm and bundled with Vite
+* `main.ts` established as the single application entry point
+* OpenStreetMap raster tiles rendered as the base map
+* GeoJSON `LineString` rendered correctly as a line layer
+* End-to-end browser rendering pipeline verified
+
+Notes:
+* GeoJSON data is currently hardcoded for validation purposes
+* This step intentionally avoids dataset transformation
+* External GeoJSON files will replace hardcoded data in Day 4
+
+**Visual confirmation**
+
+![Base map rendered](./images/day3-map-base.png)
+
+![Demo subway line on OSM base map rendered](./images/day3-osm-line.png)
+
 ## Day 2 – Drawing one subway line
 
 Initially attempted to load main.ts directly from HTML.
