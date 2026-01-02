@@ -1,3 +1,75 @@
+## Day 5 – Reconstructing subway line geometry
+
+Implemented a minimal Node.js script to transform WKT-based subway line
+data into GeoJSON.
+
+The initial approach attempted to reconstruct Line D as a single
+LineString by flattening MultiLineString segments extracted from
+`lineas-de-subte.csv`.
+
+A minimal WKT parser (`lineToCoordinates`) was implemented to support
+only the required geometry subset. No generic WKT support is intended
+at this stage. Although line geometry is already encoded as WKT MultiLineStrings,
+transformation is required to:
+* isolate a single subway line
+* decouple rendering from raw public datasets
+* experiment with geometry aggregation strategies
+
+### Initial pipeline hypothesis
+```
+WKT MultiLineString segments
+ └── Filter by line (e.g. "D")
+      └── Flatten segments
+           └── Single LineString
+                └── Render in MapLibre
+```
+
+### Observations
+
+Rendering revealed the presence of unordered and mixed-granularity
+segment geometries in the source dataset.
+
+Some MULTILINESTRING entries encode full detailed segments,
+while others represent only station-to-station endpoints.
+When naively flattened, this results in:
+- duplicated intermediate stations
+- long straight connections between non-adjacent stations
+- geometrically incorrect paths across the city
+
+![Flatten error](./images/day5-flatten-error.png)
+
+Non-terminal stations appear duplicated by design, as each
+MULTILINESTRING represents an edge between two stations.
+
+### Root cause analysis
+
+The dataset models subway lines as **unordered edge segments**.
+Each MultiLineString represents a connection between two stations,
+not an ordered path.
+
+Non-terminal stations therefore appear multiple times:
+- once as the endpoint of a previous segment
+- once as the starting point of the next segment
+
+Flattening these segments into a single LineString without
+topological ordering produces invalid geometries.
+
+### Conclusion
+
+Flattening WKT segments into a single LineString is **not a valid
+operation** for this dataset without additional graph reconstruction.
+
+Rendering segments individually preserves geometric correctness
+and avoids introducing false connections.
+
+This confirms that:
+- the dataset provides accurate geometric information
+- observed errors were caused by misuse, not data quality
+
+Flattening is deferred.
+Segment-based rendering using a FeatureCollection will be
+implemented next.
+
 ## Day 4: Rendering a real subway line from data
 
 From CSV to GeoJSON (real data)
