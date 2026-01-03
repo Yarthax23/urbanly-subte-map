@@ -1,3 +1,29 @@
+## Day 7 — Stations rendering
+
+While integrating subway station data, I noticed that datasets from the
+public portal are not homogeneous:
+
+* Some CSVs use `;` as a delimiter, others `,`
+* Geometry may be provided as WKT or as separate columns
+* Line endings vary (LF vs CRLF)
+
+Instead of forcing a uniform parser, each script was adjusted to respect
+the actual contract of its dataset.
+
+A general rule emerged:
+If a CSV comes from Windows / Excel / public portals, assume CRLF and
+normalize fields defensively.
+
+![Stations + Line D Rendering](./images/day7-line-d-segments-and-stations.png)
+
+Compared to Day 6, where segment-based rendering was validated using
+a simplified extract, rendering against the full raw dataset reveals
+the actual geometry quality of the subway lines.
+
+With the real data, line segments follow smooth curves between stations,
+confirming that previous straight or coarse connections were an artifact
+of the extract rather than the rendering approach.
+
 ## Day 6 — Segment-based rendering using FeatureCollection
 
 Replaced naive LineString flattening with segment-based rendering using a GeoJSON FeatureCollection.
