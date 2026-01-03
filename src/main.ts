@@ -2,41 +2,24 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { StyleSpecification } from 'maplibre-gl';
 
-const demoLine: GeoJSON.Feature<GeoJSON.LineString> = {
-  type: 'Feature',
-  properties: {
-    line: 'D',
-    demo: true,
-  },
-  geometry: {
-    type: 'LineString',
-    coordinates: [
-      [-58.4521256031295, -34.566215242404],
-      [-58.4516295768312, -34.5664769668698],
-      [-58.4490265638751, -34.5678793135606],
-      [-58.4446681474258, -34.5700123091016],
-    ],
-  },
-};
-
 const osmStyle: StyleSpecification = {
-  version: 8,
-  sources: {
-    osm: {
-      type: 'raster',
-      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-      tileSize: 256,
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    version: 8,
+    sources: {
+        osm: {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256,
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        },
     },
-  },
-  layers: [
-    {
-      id: 'osm-base',
-      type: 'raster',
-      source: 'osm',
-    },
-  ],
+    layers: [
+        {
+            id: 'osm-base',
+            type: 'raster',
+            source: 'osm',
+        },
+    ],
 };
 
 const map = new maplibregl.Map({
@@ -48,17 +31,35 @@ const map = new maplibregl.Map({
 
 map.on('load', () => {
     map.addSource('subway-line-preview', {
-    type: 'geojson',
-    data: '/data/processed/linea-d.geojson',
-  });
+        type: 'geojson',
+        data: '/data/processed/linea-d.geojson',
+    })
+    map.addSource('stations', {
+        type: 'geojson',
+        data: '/data/processed/estaciones.geojson',
+    });
+    ;
 
-  map.addLayer({
-    id: 'subway-line-layer',
-    type: 'line',
-    source: 'subway-line-preview',
-    paint: {
-      'line-color': '#2ecc71',
-      'line-width': 4,
-    },
-  });
+    map.addLayer({
+        id: 'subway-line-layer',
+        type: 'line',
+        source: 'subway-line-preview',
+        paint: {
+            'line-color': '#2ecc71',
+            'line-width': 3,
+        },
+    });
+
+    map.addLayer({
+        id: 'stations-layer',
+        type: 'circle',
+        source: 'stations',
+        paint: {
+            'circle-radius': 3,
+            'circle-color': '#000000',
+            'circle-stroke-width': 1,
+            'circle-stroke-color': '#ffffff',
+        },
+    });
+
 });
