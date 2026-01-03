@@ -1,6 +1,7 @@
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { StyleSpecification } from 'maplibre-gl';
+import { LINE_COLORS } from './style/lines';
 
 const osmStyle: StyleSpecification = {
     version: 8,
@@ -22,6 +23,13 @@ const osmStyle: StyleSpecification = {
     ],
 };
 
+const lineColorExpression = [
+    'match',
+    ['get', 'line'],
+    ...Object.entries(LINE_COLORS).flat(),
+    '#999',
+] as any;
+
 const map = new maplibregl.Map({
     container: 'map',
     style: osmStyle,
@@ -32,7 +40,7 @@ const map = new maplibregl.Map({
 map.on('load', () => {
     map.addSource('subway-line-preview', {
         type: 'geojson',
-        data: '/data/processed/linea-d.geojson',
+        data: '/data/processed/subte-lines.geojson',
     })
     map.addSource('stations', {
         type: 'geojson',
@@ -45,7 +53,7 @@ map.on('load', () => {
         type: 'line',
         source: 'subway-line-preview',
         paint: {
-            'line-color': '#2ecc71',
+            'line-color': lineColorExpression,
             'line-width': 3,
         },
     });
@@ -55,7 +63,7 @@ map.on('load', () => {
         type: 'circle',
         source: 'stations',
         paint: {
-            'circle-radius': 3,
+            'circle-radius': 4,
             'circle-color': '#000000',
             'circle-stroke-width': 1,
             'circle-stroke-color': '#ffffff',
