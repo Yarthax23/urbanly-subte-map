@@ -14,7 +14,7 @@ function lineToCoordinates(wkt) {
   });
 }
 
-const input = 'data/processed/lineas-de-subte-extract.csv';
+const input = 'data/processed/lineas-de-subte.csv';
 const output = 'data/processed/linea-d.geojson';
 
 const raw = fs.readFileSync(input, 'utf-8').trim();
@@ -24,25 +24,24 @@ const rows = lines.map(line => {
   return { wkt, lineasub };
 });
 
-// Filter Line D Pipeline
-const coordinates = rows
+const features = rows
   .filter(r => r.lineasub === 'D')
-  .flatMap(r => lineToCoordinates(r.wkt));
-
-// Parse CSV
-const feature = {
-  type: 'Feature',
-  properties: { line: 'D' },
-  geometry: {
-    type: 'LineString',
-    coordinates,
-  },
-};
+  .map(r => ({
+    type: 'Feature',
+    properties: {
+      line: r.lineasub,
+      id: r.id,
+    },
+    geometry: {
+      type: 'LineString',
+      coordinates: lineToCoordinates(r.wkt),
+    },
+  }));
 
 // Build GeoJSON
 const geojson = {
   type: 'FeatureCollection',
-  features: [feature],
+  features,
 };
 
 // Write file
