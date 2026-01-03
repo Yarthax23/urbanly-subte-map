@@ -42,11 +42,11 @@ const map = new maplibregl.Map({
 map.on('load', () => {
     map.addSource('subway-line-preview', {
         type: 'geojson',
-        data: '/data/processed/subte-lines.geojson',
+        data: '/src/data/lines.geojson',
     })
     map.addSource('stations', {
         type: 'geojson',
-        data: '/data/processed/estaciones.geojson',
+        data: '/src/data/stations.geojson',
     });
     ;
 

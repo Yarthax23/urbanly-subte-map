@@ -14,7 +14,7 @@ function lineToCoordinates(wkt) {
 
 // --- Build GeoJSON ---
 const input = 'data/raw/lineas-de-subte.csv';
-const output = 'data/processed/subte-lines.geojson';
+const output = 'src/data/lines.geojson';
 
 const raw = fs.readFileSync(input, 'utf-8').trim();
 const lines = raw.split('\n').slice(1); // skip header

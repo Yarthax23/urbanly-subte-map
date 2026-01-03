@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 const input = 'data/raw/estaciones_de_subte.csv';
-const output = 'data/processed/estaciones.geojson';
+const output = 'src/data/stations.geojson';
 
 const raw = fs.readFileSync(input, 'utf-8').trim();
 const lines = raw.split('\n');
