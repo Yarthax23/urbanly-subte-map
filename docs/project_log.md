@@ -1,3 +1,41 @@
+## Day 8 — Multi-line rendering, styling, and legend
+
+Completed the end-to-end visualization pipeline by rendering
+**all subway lines and stations** with proper styling and UI support.
+
+Subway lines are now rendered from a segment-based GeoJSON
+FeatureCollection, avoiding topological reconstruction and preserving
+the original dataset’s geometric intent.
+
+Each line is styled dynamically using a color mapping derived from
+feature properties, enabling scalable multi-line rendering without
+hardcoded layers.
+
+Stations are rendered as point features on top of the lines,
+using a separate GeoJSON source generated from the stations dataset.
+
+A minimal legend UI was added to communicate line colors and improve
+map readability.
+
+### Final Pipeline
+```
+Raw CSV (portal BA)
+ ├── lines_to_geojson.js
+ │     └── FeatureCollection (segment-based)
+ ├── stations_to_geojson.js
+ │     └── FeatureCollection (Point)
+ └── MapLibre
+       ├── Lines layer (color by property)
+       ├── Stations layer
+       └── Legend UI
+```
+
+This establishes a complete, data-driven, and extensible map
+rendering pipeline aligned with real-world geospatial application
+architecture.
+
+![Colored Lines and Stations](./images/day8-colored-lines-and-stations.png)
+
 ## Day 7 — Stations rendering
 
 While integrating subway station data, I noticed that datasets from the
