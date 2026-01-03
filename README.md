@@ -86,6 +86,9 @@ npm run dev
 Then open:
 http://localhost:5173
 
+Alternatively, from a Unix-like shell:
+* press `o` + `enter` to open in browser
+
 For a detailed breakdown of design decisions and data modeling iterations,
 see `docs/project_log.md`.
 
