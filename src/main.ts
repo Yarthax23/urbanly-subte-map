@@ -3,6 +3,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import type { StyleSpecification } from 'maplibre-gl';
 import { LINE_COLORS } from './style/lines';
 import { createLegend } from './ui/legend';
+import './style/legend.css';
 
 const osmStyle: StyleSpecification = {
     version: 8,
