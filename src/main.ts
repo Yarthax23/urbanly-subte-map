@@ -2,6 +2,7 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { StyleSpecification } from 'maplibre-gl';
 import { LINE_COLORS } from './style/lines';
+import { createLegend } from './ui/legend';
 
 const osmStyle: StyleSpecification = {
     version: 8,
@@ -71,3 +72,5 @@ map.on('load', () => {
     });
 
 });
+
+createLegend();
