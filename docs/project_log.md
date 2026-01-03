@@ -1,3 +1,40 @@
+## Day 6 — Segment-based rendering using FeatureCollection
+
+Replaced naive LineString flattening with segment-based rendering using a GeoJSON FeatureCollection.
+
+Each CSV row represents a single unordered edge segment encoded as a trivial MultiLineString.
+Rather than attempting to aggregate these segments into a single ordered path,
+each segment is now rendered independently as its own GeoJSON Feature.
+
+This preserves geometric correctness and eliminates false long-range connections
+introduced by naive flattening.
+
+Flattening WKT segments into a single LineString would require explicit
+topological reconstruction (graph ordering and path inference), which is
+outside the scope of this iteration.
+
+
+### Pipeline Goal
+```
+CSV rows
+ └── Filter line D
+      └── Parse WKT per row
+           └── Feature per segment
+                └── FeatureCollection
+```
+
+### Rationale
+This approach:
+* preserves geometric correctness
+* avoids false connections between non-adjacent stations
+* respects the dataset’s modeling intent
+
+No ordering or flattening is performed. 
+This establishes FeatureCollection as the correct intermediate 
+representation for rendering subway lines based on unordered segment data.
+
+![Segment Based Rendering](./images/day6-segment-based-rendering.png)
+
 ## Day 5 – Reconstructing subway line geometry
 
 Implemented a minimal Node.js script to transform WKT-based subway line
